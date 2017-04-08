@@ -39,6 +39,7 @@ else {
             if (count($resobj) > 1)
                 die(response("multi faces detected"));
             $attr = $resobj[0]["faceAttributes"];
+            $detect_res = $resobj;
             CurlPost("https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/${personGroupId}/train","");
         }
         $res1 = $redis->set("msai::user::id::".$_GET["username"], json_encode(["username"=>$_GET["username"], "register_time"=>$timestamp, "token" => $token, "age"=>$attr["age"], "gender"=>$attr["gender"]]));
@@ -46,6 +47,6 @@ else {
         if ($res1 == false || $res2 == false)
             die(json_encode(["status"=>false, "message"=>"redis save fail"]));
         setcookie("access_token",$token,$timestamp+86400, "/");
-        die(json_encode(["status"=>true, "message"=>"Register Succeed.", "token"=>$token]));
+        die(json_encode(["status"=>true, "message"=>"Register Succeed.", "token"=>$token, "data"=>$detect_res]));
     }
 }

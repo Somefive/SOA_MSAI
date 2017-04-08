@@ -25,7 +25,7 @@ if ($user == null)
         z-index: -500;
     }
 </style>
-<body>
+<body style="color: white">
 <div class="bg"></div>
 <div style="text-align: center">
     <h3 style="margin: 20px" id="welcome">Welcome To Use Automobile Prediction! <?=$user["username"];?></h3>

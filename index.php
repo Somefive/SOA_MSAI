@@ -37,7 +37,7 @@ if ($user != null) {
         <button class="btn btn-success" style="width: 320px" onclick="capture(false);" >拍照登录</button>
     </div>
     <div class="input-group" style="width: 320px">
-        <input type="text" class="form-control" placeholder="注册用户名">
+        <input type="text" class="form-control" placeholder="注册用户名" id="username">
         <span class="input-group-btn">
         <button class="btn btn-info" onclick="capture(true)">拍照注册</button>
       </span>
