@@ -27,7 +27,7 @@ else {
                 CurlDelete("https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/default/persons/${personId}");
                 die(json_encode(["status"=>false, "message"=>$resobj["error"]["message"]]));
             }
-            $detect_url="https://westus.api.cognitive.microsoft.com/face/v1.0/detect";
+            $detect_url="https://westus.api.cognitive.microsoft.com/face/v1.0/detect&returnFaceAttributes=age,gender";
             $res = CurlPost($detect_url,json_encode(["url"=>$GLOBALS["url"]."/images/$image_name"]));
             if ($res == null)
                 die(response("detection failed"));
