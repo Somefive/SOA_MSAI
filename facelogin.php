@@ -16,7 +16,7 @@ else if (count($resobj) > 1)
 else {
     $faceid = $resobj[0]["faceId"];
     $identify_url = "https://westus.api.cognitive.microsoft.com/face/v1.0/identify";
-    $res = CurlPost($identify_url, json_encode(["personGroupId"=>"personGroupId","faceIds"=>[$faceid],"confidenceThreshold"=>0.5]));
+    $res = CurlPost($identify_url, json_encode(["personGroupId"=>$personGroupId,"faceIds"=>[$faceid],"confidenceThreshold"=>0.5]));
     if ($res == null)
         die(response("Face Identify failed"));
     $resobj = json_decode($res, true);
