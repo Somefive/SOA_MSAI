@@ -10,14 +10,40 @@ if ($user != null) {
     <meta charset="utf-8">
     <title>SOA_MSAI</title>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
     <script src="jquery.webcam.min.js"></script>
 </head>
-
-<body>
-<div id="webcam"></div>
-<button onclick="capture(false);" >拍照登录</button>
-<button onclick="capture(true);" >拍照注册</button>
-<input type="text" placeholder="用户名" name="username" id="username">
+<style>
+    .bg{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: url("background.jpg") no-repeat;
+        background-size: 100% 100%;
+        filter: blur(10px) brightness(0.75);
+        z-index: -500;
+    }
+</style>
+<body style="height: 100%; width: 100%">
+<div class="bg">
+</div>
+<div style="top: 50%; left: 50%; position: absolute; transform: translate(-50%, -50%);">
+    <h3 style="color: white">Welcome to MSAI system</h3>
+    <div id="webcam"></div>
+    <div>
+        <button class="btn btn-success" style="width: 320px" onclick="capture(false);" >拍照登录</button>
+    </div>
+    <div class="input-group" style="width: 320px">
+        <input type="text" class="form-control" placeholder="注册用户名">
+        <span class="input-group-btn">
+        <button class="btn btn-info" onclick="capture(true)">拍照注册</button>
+      </span>
+    </div
+    <input type="text" placeholder="注册用户名" name="username" id="username">
+</div>
 
 <script>
     var upload_url = "";
