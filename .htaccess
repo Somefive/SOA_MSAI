@@ -1,0 +1,5 @@
+Options +FollowSymLinks
+RewriteEngine On
+#RewriteRule ^expert_finding$ expert_finding.php
+#RewriteRule ^coauthors$ coauthors.php
+Require all granted
