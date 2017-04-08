@@ -23,8 +23,10 @@ else {
             die(json_encode(["status"=>false, "message"=>"msai add person face fail"]));
         else {
             $resobj = json_decode($res, true);
-            if (isset($resobj["error"]))
+            if (isset($resobj["error"])){
+                CurlDelete("https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/default/persons/${personId}");
                 die(json_encode(["status"=>false, "message"=>$resobj["error"]["message"]]));
+            }
         }
         $res1 = $redis->set("msai::user::id::".$_GET["username"], json_encode(["username"=>$_GET["username"], "register_time"=>$timestamp, "token" => $token]));
         $res2 = $redis->set("msai::user::token::$token", $_GET["username"]);

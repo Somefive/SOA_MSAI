@@ -1,8 +1,14 @@
+<?php
+include_once "tools.php";
+if ($user != null) {
+    header("Location: predict.php");
+}
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>拍照登录</title>
+    <title>SOA_MSAI</title>
     <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="jquery.webcam.min.js"></script>
 </head>
@@ -26,6 +32,7 @@
                 alert(data.message);
             } else {
                 alert(data.message);
+                window.location = "predict.php";
             }
         },"json");
     }
