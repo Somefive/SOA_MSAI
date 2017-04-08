@@ -12,7 +12,21 @@ if ($user == null)
     <link href="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.bootcss.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"></script>
 </head>
+<style>
+    .bg{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: url("background.jpg") no-repeat;
+        background-size: 100% 100%;
+        filter: blur(10px) brightness(0.75);
+        z-index: -500;
+    }
+</style>
 <body>
+<div class="bg"></div>
 <div style="text-align: center">
     <h3 style="margin: 20px" id="welcome">Welcome To Use Automobile Prediction! <?=$user["username"];?></h3>
     <h5 style="margin: 20px" id="info">Age:&nbsp;<?=$user["age"]?>&nbsp;Gender:&nbsp;<?=$user["gender"]?></h5>
