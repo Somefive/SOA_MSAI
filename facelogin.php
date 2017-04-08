@@ -27,6 +27,8 @@ else {
         die(response("Person not recognized as registered. Please register first."));
     $personId = $candidates[0]["personId"];
     $token = $personId;
+    if ($redis->get("msai::user::token::".$token) == null)
+        die(response("Please Register first."));
     setcookie("access_token",$token,$timestamp+86400, "/");
     die(json_encode(["status"=>true, "message"=>"Register Succeed.", "token"=>$token]));
 }
