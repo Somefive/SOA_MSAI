@@ -15,6 +15,7 @@ if ($user == null)
 <body>
 <div style="text-align: center">
     <h3 style="margin: 20px" id="welcome">Welcome To Use Automobile Prediction! <?=$user["username"];?></h3>
+    <h5 style="margin: 20px" id="info">Age:&nbsp;<?=$user["age"]?>&nbsp;Gender:&nbsp;<?=$user["gender"]?></h5>
 </div>
 <div style="text-align: right">
     <a class="btn btn-info" href="logout.php" style="margin: 20px">logout</a>

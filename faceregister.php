@@ -27,9 +27,21 @@ else {
                 CurlDelete("https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/default/persons/${personId}");
                 die(json_encode(["status"=>false, "message"=>$resobj["error"]["message"]]));
             }
+            $detect_url="https://westus.api.cognitive.microsoft.com/face/v1.0/detect";
+            $res = CurlPost($detect_url,json_encode(["url"=>$GLOBALS["url"]."/images/$image_name"]));
+            if ($res == null)
+                die(response("detection failed"));
+            $resobj = json_decode($res, true);
+            if (isset($resobj["error"]) )
+                die(response($resobj["error"]["message"]));
+            if (count($resobj) == 0)
+                die(response("no face detected"));
+            if (count($resobj) > 1)
+                die(response("multi faces detected"));
+            $attr = $resobj[0]["faceAttributes"];
             CurlPost("https://westus.api.cognitive.microsoft.com/face/v1.0/persongroups/${personGroupId}/train","");
         }
-        $res1 = $redis->set("msai::user::id::".$_GET["username"], json_encode(["username"=>$_GET["username"], "register_time"=>$timestamp, "token" => $token]));
+        $res1 = $redis->set("msai::user::id::".$_GET["username"], json_encode(["username"=>$_GET["username"], "register_time"=>$timestamp, "token" => $token, "age"=>$attr["age"], "gender"=>$attr["gender"]]));
         $res2 = $redis->set("msai::user::token::$token", $_GET["username"]);
         if ($res1 == false || $res2 == false)
             die(json_encode(["status"=>false, "message"=>"redis save fail"]));
