@@ -3,7 +3,7 @@ require_once "upload.php";
 require_once "tools.php";
 $personGroupId="default";
 $detect_url="https://westus.api.cognitive.microsoft.com/face/v1.0/detect";
-$res = CurlPost($detect_url,["url"=>$GLOBALS["url"]."/images/$image_name"]);
+$res = CurlPost($detect_url,json_encode(["url"=>$GLOBALS["url"]."/images/$image_name"]));
 if ($res == null)
     die(response("MSAI detect fail"));
 $resobj = json_decode($res,true);
@@ -16,7 +16,7 @@ else if (count($resobj) > 1)
 else {
     $faceid = $resobj[0]["faceId"];
     $identify_url = "https://westus.api.cognitive.microsoft.com/face/v1.0/identify";
-    $res = CurlPost($identify_url, ["personGroupId"=>"personGroupId","faceIds"=>[$faceid],"confidenceThreshold"=>0.5]);
+    $res = CurlPost($identify_url, json_encode(["personGroupId"=>"personGroupId","faceIds"=>[$faceid],"confidenceThreshold"=>0.5]));
     if ($res == null)
         die(response("Face Identify failed"));
     $resobj = json_decode($res, true);
